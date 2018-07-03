@@ -54,9 +54,11 @@ if __name__ == "__main__":
         t = 0
         while True:
             t += 1
+            r = 0
             env.render()
             action = agent.choose_action(str(observation))
             observation_, reward, done, info = env.step(action)
+            r += reward
             # print(reward)
             agent.learn(str(observation), action, reward, str(observation_), done)
 
@@ -64,6 +66,7 @@ if __name__ == "__main__":
 
             if done:
                 print("Episode{} finished after {} timesteps".format(episode+1, t))
+                print(r/t)
                 # print(agent.q_table)
                 break
 
